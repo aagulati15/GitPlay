@@ -1,0 +1,19 @@
+on: [workflow_dispatch]
+ 
+jobs:
+  run-code-pipeline-build:
+    runs-on: [self-hosted]
+    name: A job to build source in Code Pipeline
+    steps:
+      - name: Build
+        uses: bmc-compuware/ispw-build@ZENG-308808-Add-Certificate-Support-For-Build-Action
+        id: build
+        with:
+          ces_url: "http://localhost:48080/"
+          #ces_token: ${{ secrets.CES_TOKEN }}
+          certificate: ${{ secrets.KAJAL_CERTIFICATE }}
+          srid: cw09-47624
+          runtime_configuration: TPTP
+          task_id: "7E85516F7124,7E85516F733A"
+      - name: Get the set ID for the build
+        run: echo "The Code Pipeline set used for the build is ${{ steps.build.outputs.set_id }}"
