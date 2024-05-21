@@ -1,0 +1,20 @@
+on: [workflow_dispatch]
+ 
+jobs:
+  run-ispw-deploy:
+    runs-on: [self-hosted]
+    name: A job to deploy in Code Pipeline
+    steps:
+      - name: Deploy
+        uses: bmc-compuware/ispw-deploy@ZENG-308808-Add-Certificate-Support-For-Deploy-Action
+        id: deploy
+        with:
+          ces_url: "http://172.19.173.36:48227/"
+          certificate: ${{ secrets.KAJAL_CERTIFICATE }}
+          srid: cw09-47624
+          runtime_configuration: TPTP
+          assignment_id: KATH015361
+          level: DEV1
+          task_id: "7E854B64D76D,7E854B532492"
+      - name: Get the set ID for the deploy
+        run: echo "The Code Pipeline set used for the deploy is ${{ steps.deploy.outputs.set_id }}"

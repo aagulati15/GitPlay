@@ -1,0 +1,39 @@
+on: workflow_dispatch
+ 
+jobs:
+
+  run-ispw-generate:
+
+    runs-on: [self-hosted]
+
+    name: A job to generate source in Code Pipeline
+
+    steps:
+
+      - name: Generate
+
+        uses: bmc-compuware/ispw-generate@ZENG-308808-Add-Certificate-Support-For-Generate-Action
+
+        id: generate
+
+        with:
+
+          ces_url: "http://localhost:48080/"
+
+          #ces_token: "${{ secrets.CES_TOKEN }}"
+
+          certificate: "${{ secrets.KAJAL_CERTIFICATE }}"
+
+          srid: cw09-47624
+
+          runtime_configuration: TPTP
+
+          assignment_id: KATH015270
+
+          level: DEV1
+
+          task_id: "7E854268BB98,7E854268BCD0"
+
+      - name: Get the set ID for the generate
+
+        run: echo "The Code Pipeline set used for the generate is ${{ steps.generate.outputs.set_id }}"
