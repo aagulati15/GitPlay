@@ -32,7 +32,7 @@ jobs:
             uid: 'pinayg0'
             pass: ${{ secrets.ISPW_USER1_PWD }}
             runtimeConfiguration: 'TPTP'
-            stream: 'ISP4'
+            stream: 'TOPAZ'
             application: 'ISP4'
             subAppl: 'ISP4'
             checkoutLevel: 'DEV1'
