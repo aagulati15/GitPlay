@@ -1,0 +1,44 @@
+# This is a basic workflow to help you get started with Actions
+
+name: arrakis sync local
+
+# Controls when the workflow will run
+on: workflow_dispatch
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  sync:
+    # The type of runner that the job will run on
+    runs-on: [self-hosted]
+    
+    env:
+      GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+      Win_Topaz_Location: 'C:\Topaz\WorkbenchCLI'
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+       -  name: Checkout
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+       -  name: Synchronize
+          # uses: bmc-compuware/ispw-sync-local@main
+          uses: bmc-compuware/ispw-sync-local@main
+          id: sync-local
+          with:
+            host: 'cw09.bmc.com'
+            port: 47624
+            uid: 'pinayg0'
+            pass: ${{ secrets.ISPW_USER1_PWD }}
+            runtimeConfiguration: 'TPTP'
+            stream: 'ISP4'
+            application: 'ISP4'
+            subAppl: 'ISP4'
+            checkoutLevel: 'DEV1'
+            gitUid: 'aagulati15'
+            gitToken: ${{ secrets.TOKEN_GITHUB }}
+            winTopazPath: ${{ env.Win_Topaz_Location }}
+            gitCommit: 'cb46176'
+            gitFromHash: 'ef01749'
+            showEnv: true
