@@ -76,7 +76,7 @@
 007600
 007700
 007800****************************************************
-007900**** A COPY MEMBER FOR THE LINKAGE AREA PARAMETERS
+007900**** A COPY MEMBER FOR THE LINKAGE AREA PARAMETERS.....
 008000****************************************************
 008100 COPY TCPYB07 .
 008200
